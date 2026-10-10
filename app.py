@@ -533,19 +533,28 @@ with right:
                 "mean the message is safe."
             )
 
-        st.markdown("#### 📊 Option probabilities")
-        for option in OPTIONS:
-            probability = probabilities.get(option, 0.0)
-            label_col, value_col = st.columns([3, 1])
-            with label_col:
-                st.caption(option.replace("_", " "))
-            with value_col:
-                st.markdown(
-                    f"<div style='text-align:right;font-weight:800;"
-                    f"color:#4f4b99;font-size:12px'>{probability:.2%}</div>",
-                    unsafe_allow_html=True,
-                )
-            st.progress(max(0.0, min(1.0, probability)))
+      
+        st.markdown("#### 🎯 Rule-based confidence score")
+
+        confidence = float(result_data["confidence"])
+
+        st.progress(max(0.0, min(1.0, confidence)))
+        st.markdown(
+            f"<div style='text-align:right;font-weight:800;"
+            f"color:#4f4b99;font-size:14px'>{confidence:.0%}</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.caption(
+            "Heuristic score from keyword-based safety rules — "
+            "not a calibrated probability or guarantee of correctness."
+        )
+
+        if result_data.get("reasons"):
+            st.markdown("#### 🔎 Warning signs detected")
+            for reason in result_data["reasons"]:
+                st.markdown(f"- {reason}")
+
 
         st.markdown("#### 🧭 Recommended safety steps")
         
