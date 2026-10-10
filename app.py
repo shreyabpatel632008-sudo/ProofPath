@@ -442,7 +442,7 @@ with right:
     st.markdown("""
     <div class="section-heading">✦ Your decision dashboard</div>
     <div class="section-sub">
-      A recommendation from the live Strands Decider model.
+      Live AI analysis is not connected to this public demo yet.
     </div>
     """, unsafe_allow_html=True)
 
