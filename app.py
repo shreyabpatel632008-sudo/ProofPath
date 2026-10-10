@@ -401,17 +401,16 @@ with left:
                     "probabilities": result.probabilities,
                     "needs_review": result.needs_review,
                 }
-               except Exception:
-    st.warning(
-        "The Strands Decider service is unavailable. "
-        "The public demo needs a hosted Decider endpoint "
-        "before live analysis can work."
-    )
-    st.info(
-        "You can explore the interface and sample scenarios, "
-        "but live AI analysis is not available on this deployment yet."
-    )
-
+                          except Exception:
+                st.warning(
+                    "The Strands Decider service is unavailable. "
+                    "The public demo needs a hosted Decider endpoint "
+                    "before live analysis can work."
+                )
+                st.info(
+                    "You can explore the interface and sample scenarios, "
+                    "but live AI analysis is not available on this deployment yet."
+                )
     st.markdown("---")
     st.markdown("""
     <div class="section-heading">✨ Try a sample scenario</div>
