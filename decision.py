@@ -10,7 +10,6 @@ from typing import Dict
 # ProofPath Configuration
 # ============================================================
 
-python
 def get_setting(name, default=""):
     value = os.environ.get(name)
 
