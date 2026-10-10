@@ -393,7 +393,7 @@ with left:
             st.warning("Please enter a message or choose a sample scenario.")
         else:
             try:
-                with st.spinner("The Decider is considering your situation…"):
+                with st.spinner("The Decider is considering your situation..."):
                     result = get_decision(message)
                 st.session_state.proofpath_result = {
                     "selected_action": result.selected_action,
@@ -401,16 +401,17 @@ with left:
                     "probabilities": result.probabilities,
                     "needs_review": result.needs_review,
                 }
-                          except Exception:
+                st.session_state.last_message = message
+            except Exception:
                 st.warning(
                     "The Strands Decider service is unavailable. "
-                    "The public demo needs a hosted Decider endpoint "
-                    "before live analysis can work."
+                    "Live analysis needs a hosted Decider endpoint."
                 )
                 st.info(
-                    "You can explore the interface and sample scenarios, "
-                    "but live AI analysis is not available on this deployment yet."
+                    "You can explore the interface, but live AI analysis "
+                    "is not available on this deployment yet."
                 )
+
     st.markdown("---")
     st.markdown("""
     <div class="section-heading">✨ Try a sample scenario</div>
