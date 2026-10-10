@@ -10,6 +10,46 @@ st.set_page_config(
 )
 
 # ---------- DESIGN ----------
+
+/* ---------- SAMPLE SCENARIO TILES ---------- */
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    border-color: #e6e3f7;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 3px 12px rgba(75, 65, 140, 0.05);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"]:hover {
+    border-color: #c8c0ff;
+    box-shadow: 0 5px 16px rgba(98, 85, 237, 0.10);
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] p strong {
+    color: #292653;
+    font-weight: 800;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stCaptionContainer"] {
+    min-height: 68px;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] .stButton button {
+    border: 1px solid #e1dcff;
+    border-radius: 10px;
+    background: #f6f3ff;
+    color: #6255c8;
+    font-size: 12px;
+    font-weight: 700;
+    min-height: 38px;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] .stButton button:hover {
+    background: #ece7ff;
+    border-color: #c7bcff;
+    color: #493bb0;
+}
+
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap');
