@@ -55,6 +55,7 @@ def analyze_situation(message):
     if not text:
         raise ValueError("Please describe the situation before analyzing it.")
 
+
     payment_terms = [
         "pay", "payment", "processing fee", "registration fee",
         "application fee", "transfer money", "send money",
@@ -72,12 +73,13 @@ def analyze_situation(message):
         "immediately", "immediate", "urgent", "right now",
         "act now", "within minutes", "final warning",
         "award can be released", "offer expires",
+        "account will be blocked", "will be blocked",
     ]
 
     credential_terms = [
         "otp", "one-time password", "password",
         "bank details", "card number", "pin number",
-        "account will be blocked", "share your credentials",
+        "share your credentials",
     ]
 
     prize_terms = [
@@ -91,49 +93,49 @@ def analyze_situation(message):
     credential_risk = any(term in text for term in credential_terms)
     prize_risk = any(term in text for term in prize_terms)
 
-    if credential_risk or (
-        payment_risk and pressure_risk
-    ):
+    # Record individual warning signs for the explanation.
+    reasons = []
+    if payment_risk:
+        reasons.append("The message mentions a payment or fee.")
+    if identity_risk:
+        reasons.append("The message mentions identity documents or an unfamiliar link.")
+    if pressure_risk:
+        reasons.append("The message uses urgency or threatens a consequence.")
+    if credential_risk:
+        reasons.append("The message mentions passwords, OTPs, or financial credentials.")
+    if prize_risk:
+        reasons.append("The message makes a prize or reward claim.")
+
+    if credential_risk:
         action = "DO_NOT_PROCEED"
-        confidence = 0.86
-        reasons = [
-            "The situation contains a request for sensitive credentials or combines payment with pressure."
-        ]
+        confidence = 0.90
+
+    elif payment_risk and pressure_risk:
+        action = "DO_NOT_PROCEED"
+        confidence = 0.88
 
     elif prize_risk and (payment_risk or pressure_risk):
         action = "DO_NOT_PROCEED"
-        confidence = 0.82
-        reasons = [
-            "A prize or reward claim combined with payment or urgency warrants caution."
-        ]
+        confidence = 0.86
 
-    elif identity_risk or payment_risk:
+    elif identity_risk:
         action = "VERIFY_SOURCE"
-        confidence = 0.80
-        reasons = []
+        confidence = 0.82
 
-        if identity_risk:
-            reasons.append(
-                "The situation mentions identity documents or an unfamiliar link."
-            )
-        if payment_risk:
-            reasons.append(
-                "The situation mentions a payment or fee."
-            )
+    elif payment_risk:
+        action = "VERIFY_SOURCE"
+        confidence = 0.78
 
     elif pressure_risk or prize_risk:
         action = "SEEK_HELP"
-        confidence = 0.70
-        reasons = [
-            "The situation contains urgency or a prize-related warning sign."
-        ]
+        confidence = 0.72
 
     else:
         action = "PROCEED_WITH_CAUTION"
         confidence = 0.60
-        reasons = [
-            "No specific high-risk pattern was detected by the current rules. This does not prove the situation is safe."
-        ]
+        reasons.append(
+            "No listed warning pattern was detected; this does not prove the situation is safe."
+        )
 
     meanings = {
         "VERIFY_SOURCE": (
