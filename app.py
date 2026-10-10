@@ -401,14 +401,16 @@ with left:
                     "probabilities": result.probabilities,
                     "needs_review": result.needs_review,
                 }
-                st.session_state.last_message = message
-            except Exception as error:
-                st.error("ProofPath could not obtain a decision.")
-                st.caption(
-                    "Check that the local Strands Decider server is running "
-                    "in the other PowerShell window."
-                )
-                st.code(str(error))
+               except Exception:
+    st.warning(
+        "The Strands Decider service is unavailable. "
+        "The public demo needs a hosted Decider endpoint "
+        "before live analysis can work."
+    )
+    st.info(
+        "You can explore the interface and sample scenarios, "
+        "but live AI analysis is not available on this deployment yet."
+    )
 
     st.markdown("---")
     st.markdown("""
