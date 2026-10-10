@@ -11,6 +11,9 @@ st.set_page_config(
 
 # ---------- DESIGN ----------
 
+st.markdown("""
+<style>
+
 /* ---------- SAMPLE SCENARIO TILES ---------- */
 div[data-testid="stVerticalBlockBorderWrapper"] {
     border-color: #e6e3f7;
@@ -50,8 +53,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] .stButton button:hover {
     color: #493bb0;
 }
 
-st.markdown("""
-<style>
+/* ---------- EXISTING DESIGN CSS ---------- */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap');
 
 :root {
