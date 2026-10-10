@@ -533,11 +533,6 @@ Rule-based safety analysis is active. Live AI analysis is not connected in this 
             unsafe_allow_html=True,
         )
 
-        st.caption(
-            "Heuristic score from keyword-based safety rules — "
-            "not a calibrated probability or guarantee of correctness."
-        )
-
         if result_data.get("reasons"):
             st.markdown("#### 🔎 Warning signs detected")
             for reason in result_data["reasons"]:
