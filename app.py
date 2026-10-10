@@ -392,16 +392,25 @@ with left:
         if not message:
             st.warning("Please enter a message or choose a sample scenario.")
         else:
+            
             try:
-                with st.spinner("The Decider is considering your situation..."):
+                with st.spinner("Analyzing your situation..."):
                     result = get_decision(message)
+
                 st.session_state.proofpath_result = {
-                    "selected_action": result.selected_action,
-                    "confidence": result.confidence,
-                    "probabilities": result.probabilities,
-                    "needs_review": result.needs_review,
+                    "selected_action": result["selected_action"],
+                    "confidence": result["confidence"],
+                    "probabilities": result["probabilities"],
+                    "needs_review": result["human_review"],
+                    "meaning": result["meaning"],
+                    "guidance": result["guidance"],
+                    "analysis_mode": result["analysis_mode"],
                 }
                 st.session_state.last_message = message
+
+            except Exception as error:
+                st.error(f"Analysis failed: {error}")
+
             except Exception:
                 st.warning(
                     "The Strands Decider service is unavailable. "
@@ -484,7 +493,9 @@ with right:
         <div class="result-card">
           <div class="result-label">🛡️ RECOMMENDED NEXT ACTION</div>
           <div class="result-action">{action.replace("_", " ")}</div>
-          <div class="result-description">{OPTIONS[action]}</div>
+          
+          <div class="result-description">{result_data["meaning"]}</div>
+
         </div>
         """, unsafe_allow_html=True)
 
@@ -537,7 +548,9 @@ with right:
             st.progress(max(0.0, min(1.0, probability)))
 
         st.markdown("#### 🧭 Recommended safety steps")
-        for number, step in enumerate(GUIDANCE[action], start=1):
+        
+        for number, step in enumerate(result_data["guidance"], start=1):
+
             st.markdown(f"""
             <div class="step">
               <div class="step-number">{number}</div>
