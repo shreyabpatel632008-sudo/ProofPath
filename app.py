@@ -521,13 +521,6 @@ Rule-based safety analysis is active. Live AI analysis is not connected in this 
             </div>
             """, unsafe_allow_html=True)
 
-        
-        if needs_review:
-            st.info(
-                "Human review is recommended for consequential decisions. "
-                "This rule-based score is a heuristic, not a calibrated probability."
-            )
-
         else:
             st.info(
                 "The review rule did not flag this result. This does not "
