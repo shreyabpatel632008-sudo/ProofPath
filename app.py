@@ -502,9 +502,9 @@ Rule-based safety analysis is active. Live AI analysis is not connected in this 
         with metric_a:
             st.markdown(f"""
             <div class="metric-card">
-              <div class="metric-label">🎯 Decider confidence</div>
+              <div class="metric-label">🎯 Rule-based confidence score</div>
               <div class="metric-value">{confidence:.2%}</div>
-              <div class="small-note">Model-reported confidence</div>
+              <div class="small-note">Heuristic score, not a calibrated probability</div>
             </div>
             """, unsafe_allow_html=True)
         with metric_b:
