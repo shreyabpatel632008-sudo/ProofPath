@@ -521,15 +521,6 @@ Rule-based safety analysis is active. Live AI analysis is not connected in this 
             </div>
             """, unsafe_allow_html=True)
 
-
-        st.progress(max(0.0, min(1.0, confidence)))
-        st.markdown(
-            f"<div style='text-align:right;font-weight:800;"
-            f"color:#4f4b99;font-size:14px'>{confidence:.0%}</div>",
-            unsafe_allow_html=True,
-        )
-
-
         if result_data.get("reasons"):
             st.markdown("#### 🔎 Warning signs detected")
             for reason in result_data["reasons"]:
