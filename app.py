@@ -588,7 +588,7 @@ st.markdown("""
   &nbsp; · &nbsp; 🤝 Ask for help &nbsp; · &nbsp; ✨ Make safer choices
   <br><br>
   <span style="font-size:10px;">
-    Built with Python, Streamlit and Strands Decider.
+    Built with Python and Streamlit. This demo uses local rule-based safety checks; live Strands Decider and Bedrock integration are not active.
     Bedrock integration is separate and is not claimed as active.
   </span>
 </div>
