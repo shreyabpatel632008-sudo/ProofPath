@@ -521,22 +521,18 @@ Rule-based safety analysis is active. Live AI analysis is not connected in this 
             </div>
             """, unsafe_allow_html=True)
 
+        
         if needs_review:
-            st.warning(
-                "This recommendation is uncertain. Seek human review "
-                "before taking consequential action."
+            st.info(
+                "Human review is recommended for consequential decisions. "
+                "This rule-based score is a heuristic, not a calibrated probability."
             )
+
         else:
             st.info(
                 "The review rule did not flag this result. This does not "
                 "mean the message is safe."
             )
-
-      
-        st.markdown("#### 🎯 Rule-based confidence score")
-
-        confidence = float(result_data["confidence"])
-
         st.progress(max(0.0, min(1.0, confidence)))
         st.markdown(
             f"<div style='text-align:right;font-weight:800;"
@@ -587,9 +583,10 @@ st.markdown("""
   💜 Verify sources &nbsp; · &nbsp; 🔎 Spot warning signs
   &nbsp; · &nbsp; 🤝 Ask for help &nbsp; · &nbsp; ✨ Make safer choices
   <br><br>
-  <span style="font-size:10px;">
+  
+<span style="font-size:10px;">
     Built with Python and Streamlit. This demo uses local rule-based safety checks; live Strands Decider and Bedrock integration are not active.
-    Bedrock integration is separate and is not claimed as active.
-  </span>
+</span>
+
 </div>
 """, unsafe_allow_html=True)
