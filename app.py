@@ -343,8 +343,7 @@ with hero_left:
       </div>
       <div class="hero-copy">
         Unsure about a scholarship, internship, payment request or suspicious
-        message? ProofPath uses the Strands Decider model to recommend a
-        cautious next step and show you how to proceed.
+        message? ProofPath uses rule-based safety checks to identify common warning signs, recommend a cautious next step, and help you decide how to proceed.
       </div>
       <div class="privacy">
         🔒 <b>Privacy first:</b> Do not paste passwords, OTPs, bank details,
@@ -451,7 +450,7 @@ with right:
     st.markdown("""
     <div class="section-heading">✦ Your decision dashboard</div>
     <div class="section-sub">
-      Live AI analysis is not connected to this public demo yet.
+Rule-based safety analysis is active. Live AI analysis is not connected in this demo.
     </div>
     """, unsafe_allow_html=True)
 
@@ -517,7 +516,7 @@ with right:
                 {review_label}
               </div>
               <div class="small-note">
-                {"Low confidence: ask a trusted person to review." if needs_review else "The prototype rule did not flag this result."}
+                {"Human review is recommended for consequential decisions. This rule-based score is a heuristic, not a calibrated probability."}
               </div>
             </div>
             """, unsafe_allow_html=True)
