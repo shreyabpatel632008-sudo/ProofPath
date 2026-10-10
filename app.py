@@ -25,13 +25,12 @@ st.markdown("""
 html, body, [class*="css"] {
     font-family: 'DM Sans', sans-serif;
 }
+
 .stApp {
-    background:
-        radial-gradient(ellipse at 4% 5%, #f9edff 0, transparent 27%),
-        radial-gradient(ellipse at 98% 15%, #e9f4ff 0, transparent 28%),
-        #fafbff;
+    background: #f8f9ff;
     color: var(--ink);
 }
+
 .block-container {
     max-width: 1450px;
     padding-top: 1.3rem;
@@ -84,14 +83,16 @@ p, label, li {
     font-size: 12px;
     letter-spacing: .5px;
 }
+
 .hero {
-    background: linear-gradient(115deg, #f0edff 0%, #edf8ff 53%, #fff0fa 100%);
-    border: 1px solid #e3e4ff;
-    border-radius: 25px;
-    padding: 29px 32px;
-    margin: 6px 0 24px;
-    box-shadow: 0 10px 30px #3d4c7b09;
+    background: linear-gradient(120deg, #f0edff 0%, #f7f5ff 65%, #eef8ff 100%);
+    border: 1px solid #e5e2fb;
+    border-radius: 22px;
+    padding: 23px 26px;
+    margin: 4px 0 20px;
+    box-shadow: 0 5px 18px #3d4c7b08;
 }
+
 .eyebrow {
     color: #6557e9;
     font-size: 11px;
@@ -139,14 +140,16 @@ p, label, li {
     font-size: 12px;
     line-height: 1.6;
 }
+
 .section-card {
-    background: #ffffffd9;
-    border: 1px solid #e6e8fa;
-    border-radius: 20px;
-    padding: 21px;
-    box-shadow: 0 7px 24px #37436b08;
-    margin-bottom: 16px;
+    background: #ffffff;
+    border: 1px solid #e8e9f6;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 3px 12px #37436b06;
+    margin-bottom: 14px;
 }
+
 .section-heading {
     font-family: 'Nunito', sans-serif;
     color: #202653;
@@ -265,6 +268,12 @@ div.stButton > button[kind="primary"]:hover {
     background: linear-gradient(100deg, #5546df, #7260ef);
     box-shadow: 0 8px 20px #6557ee32;
 }
+
+div.stButton > button:hover {
+    border-color: #c9c2ff;
+    transform: translateY(-1px);
+}
+
 div[data-testid="stTextArea"] textarea {
     border: 1px solid #e0e4f5;
     border-radius: 13px;
