@@ -117,6 +117,7 @@ def lookup_verification_guidance(query: str) -> dict[str, Any]:
             "matches": matched_records,
         }
 
+
     except (
         BotoCoreError,
         ClientError,
@@ -124,7 +125,11 @@ def lookup_verification_guidance(query: str) -> dict[str, Any]:
         KeyError,
         UnicodeDecodeError,
     ) as exc:
-        print(f"Guidance lookup failed: {type(exc).__name__}")
+        if isinstance(exc, ClientError):
+            error_code = exc.response.get("Error", {}).get("Code", "Unknown")
+            print(f"Guidance lookup failed: ClientError ({error_code})")
+        else:
+            print(f"Guidance lookup failed: {type(exc).__name__}")
 
         return {
             "status": "lookup_unavailable",
@@ -134,3 +139,4 @@ def lookup_verification_guidance(query: str) -> dict[str, Any]:
             ),
             "matches": [],
         }
+
