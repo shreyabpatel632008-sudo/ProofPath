@@ -1,4 +1,4 @@
-
+from verification_tool import lookup_verification_guidance
 import streamlit as st
 from decision import get_decision, OPTIONS, GUIDANCE
 
@@ -442,7 +442,6 @@ with left:
         if not message:
             st.warning("Please enter a message or choose a sample scenario.")
         else:
-            
             try:
                 with st.spinner("Analyzing your situation..."):
                     result = get_decision(message)
@@ -460,16 +459,58 @@ with left:
 
             except Exception as error:
                 st.error(f"Analysis failed: {error}")
-
             except Exception:
                 st.warning(
                     "The Strands Decider service is unavailable. "
-                    "Live analysis needs a hosted Decider endpoint."
+                    "Live AI analysis needs a hosted Decider endpoint."
                 )
                 st.info(
-                    "You can explore the interface, but live AI analysis "
-                    "is not available on this deployment yet."
+                    "SourceCheck will try to retrieve guidance independently."
                 )
+
+            try:
+                st.session_state.sourcecheck_result = (
+                    lookup_verification_guidance(message)
+                )
+            except Exception:
+                st.session_state.sourcecheck_result = {
+                    "status": "lookup_unavailable",
+                    "message": (
+                        "Verification guidance is unavailable. "
+                        "Check an independent official source."
+                    ),
+                    "matches": [],
+                }
+
+
+    
+    if st.session_state.get("sourcecheck_result"):
+        guidance_result = st.session_state.sourcecheck_result
+
+        st.markdown("### 🔎 SourceCheck — Verification Guidance")
+        st.caption(
+            "Guidance is retrieved from your private AWS S3 bucket. "
+            "A match does not prove that a message is genuine."
+        )
+
+        st.write(
+            guidance_result.get(
+                "message",
+                "Review the result and verify independently.",
+            )
+        )
+
+        status = guidance_result.get("status", "unknown")
+        st.caption(f"Lookup status: {status.replace('_', ' ').title()}")
+
+        for record in guidance_result.get("matches", []):
+            with st.container(border=True):
+                st.markdown(f"**{record.get('name', 'Verification guidance')}**")
+                st.write(record.get("guidance", "No guidance provided."))
+
+                url = record.get("url")
+                if url:
+                    st.markdown(f"[Open reference source]({url})")
 
     st.markdown("---")
     st.markdown("""
